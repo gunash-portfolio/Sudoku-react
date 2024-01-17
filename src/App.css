@@ -1,10 +1,69 @@
+/* App.css */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-}
-.app {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+}
+
+.app {
+  text-align: center;
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.main-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column; /* Set flex-direction to column */
+  align-items: center; /* Center items along the main axis */
+}
+
+.sudoku-grid {
+  display: inline-block;
+  border: 2px solid #000;
+  margin-bottom: 1rem; /* Add margin to separate the grid and button */
+}
+
+.sudoku-row {
+  display: flex;
+}
+
+.sudoku-cell {
+  flex: 1;
+  height: 60px;
+  width: 60px;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.sudoku-cell:nth-child(3n) {
+  border-right: 2px solid #000;
+}
+
+.sudoku-cell:nth-child(3n + 1) {
+  border-left: 2px solid #000;
+}
+
+.sudoku-cell:nth-child(9n) {
+  border-bottom: 2px solid #000;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
 }

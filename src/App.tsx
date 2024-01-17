@@ -1,63 +1,40 @@
+// App.tsx
 import React, { useState } from 'react';
 import './App.css';
+import SudokuCell from './SudokuCell';
 
-interface SudokuCellProps {
-  index:number;
-  value:string;
-  onChange:(index:number,value:string)=>void;
-}
+const App: React.FC = () => {
+  const [sudokuValues, setSudokuValues] = useState<number[]>(Array(81).fill(null));
 
-
-
-const SudokuCell:React.FC<SudokuCellProps> = ({index,value, onChange}) => {
-  return (
-    <div className="sudoku-cell">
-      <input
-      type="text"
-      maxLength={1}
-      value={value}
-      onChange={(e)=> onChange(index,e.target.value)}
-      />
-    </div>
-  );
-};
-
-function App() {
-  const [sudokuValues,setSudokuValues] = useState<Array<string>>(Array(81).fill(''));
-  const handleInputChange = (index:number, value:string)=> {
+  const handleCellChange = (index: number, value: number | null) => {
     const newValues = [...sudokuValues];
-    newValues[index] = value;
-    setSudokuValues(newValues)
+    newValues[index] = value !== null ? value : 0;
+    setSudokuValues(newValues);
   };
+
   return (
-  <div className="app">
-    <header className="header">
-      <h1>Sudoku Game</h1>
-    </header>
-    <main className="main-content">
+    <div className="app">
+      <main className="main-content">
         <div className="sudoku-grid">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((row) => (
-            <div key={row} className="sudoku-row">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((col) => {
-                const index = (row - 1) * 9 + col - 1;
+          {[...Array(9)].map((_, rowIndex) => (
+            <div key={rowIndex} className="sudoku-row">
+              {[...Array(9)].map((_, colIndex) => {
+                const index = rowIndex * 9 + colIndex;
                 return (
                   <SudokuCell
-                    key={col}
-                    index={index}
+                    key={colIndex}
                     value={sudokuValues[index]}
-                    onChange={handleInputChange}
+                    onChange={(value) => handleCellChange(index, value)}
                   />
                 );
               })}
             </div>
           ))}
         </div>
+        <button onClick={() => console.log(sudokuValues)}>Check Solution</button>
       </main>
-      <footer className="footer">
-        <p>&copy; 2024 Sudoku App</p>
-      </footer>
-  </div>
+    </div>
   );
-}
+};
 
 export default App;
