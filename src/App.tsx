@@ -7,21 +7,25 @@ interface SudokuCellProps {
   onChange:(index:number,value:string)=>void;
 }
 
-const Tutorial = (index:number,value:string)=> {
-return (
-  <h1>First OnChange</h1>
-)
-};
+
 
 const SudokuCell:React.FC<SudokuCellProps> = ({index,value, onChange}) => {
   return (
-    <h1>Anan</h1>
-  )
-}
+    <div className="sudoku-cell">
+      <input
+      type="text"
+      maxLength={1}
+      value={value}
+      onChange={(e)=> onChange(index,e.target.value)}
+      />
+    </div>
+  );
+};
 
 function App() {
   return (
-  <SudokuCell index={1} value={"emiler"} onChange={Tutorial}></SudokuCell>
+  //<SudokuCell></SudokuCell>
+  <h1>Anan</h1>
   );
 }
 
