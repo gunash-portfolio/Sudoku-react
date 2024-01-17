@@ -1,64 +1,10 @@
-/* App.css */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  box-sizing: border-box;
 }
-
 .app {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-}
-
-.header {
-  color: #000000;
-  padding: 1rem;
-  text-align: center;
-}
-
-.main-content {
-  flex: 1;
-  padding: 1rem;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-}
-
-
-.sudoku-row {
-  display: flex;
-}
-
-.sudoku-cell {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #000;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.sudoku-cell:nth-child(3n) {
-  border-right: 1px solid #000; /* Thick black border for every third column */
-}
-
-.sudoku-cell:nth-child(3n + 1) {
-  border-left: 1px solid #000; /* Thick black border for the beginning of every third column */
-}
-
-.sudoku-cell:nth-child(9n) {
-  border-bottom: 1px solid #000; /* Thick black border for every third row */
-}
-
-.footer {
-  color: black;
-  padding: 1rem;
-  text-align: center;
 }
