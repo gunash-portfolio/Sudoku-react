@@ -4,7 +4,7 @@ import './App.css';
 import SudokuCell from './SudokuCell';
 
 const App: React.FC = () => {
-  const [sudokuValues, setSudokuValues] = useState<number[]>(Array(81).fill(null));
+  const [sudokuValues, setSudokuValues] = useState<number[]>([]);
 
   const handleCellChange = (index: number, value: number | null) => {
     const newValues = [...sudokuValues];
