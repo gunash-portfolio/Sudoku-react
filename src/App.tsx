@@ -1,17 +1,21 @@
 // Update App.tsx
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css';
 import SudokuCell from './SudokuCell';
+import { generatePartialSudoku } from './SudokuGenerator';
 
 const App: React.FC = () => {
   const [sudokuValues, setSudokuValues] = useState<number[]>([]);
 
+  useEffect(() => {
+    setSudokuValues(generatePartialSudoku());
+  }, []); // Run this effect only once on mount
+
   const handleCellChange = (index: number, value: number | null) => {
     const newValues = [...sudokuValues];
-    newValues[index] = value !== null ? value : 0;
+    newValues[index] = value !== null ? value : 0 ;
     setSudokuValues(newValues);
   };
-
   const checkSolution = () => {
     if (isSudokuSolved(sudokuValues)) {
       alert('Congratulations! You solved the puzzle correctly!');

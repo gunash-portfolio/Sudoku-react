@@ -2,7 +2,7 @@
 import React, { ChangeEvent } from 'react';
 
 interface SudokuCellProps {
-  value: number;
+  value: number | null;
   onChange: (value: number | null) => void;
 }
 
@@ -23,7 +23,7 @@ const SudokuCell: React.FC<SudokuCellProps> = ({ value, onChange }) => {
       type="text"
       inputMode="numeric"
       pattern="[0-9]*"
-      value={value !== null ? value : ''}
+      value={value !== null && value !== 0 ? value : ''}
       onChange={handleChange}
       className="sudoku-cell"
     />
