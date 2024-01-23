@@ -88,4 +88,76 @@ export default SudokuCell;
 - The `handleChange` function is responsible for parsing the input value and updating the cell value accordingly.
 - The `value` prop represents the current value of the cell, and the `onChange` prop is a callback function to handle value changes.
 - The input element is configured to only accept numeric input, and invalid inputs result in a `null` value.
+
+Feel free to customize this explanation or add more details if necessary!
+
+# SudokuGenerator Module
+The `SudokuGenerator` module provides functionality to generate a partial Sudoku grid and check the validity of moves.
+
+## Code Explanation
+```tsx
+// SudokuGenerator.ts
+export const generatePartialSudoku = (): number[] => {
+    const grid = Array(81).fill(0);
+    fillRandomCells(grid);
+    return grid;
+};
+
+const fillRandomCells = (grid: number[]): void => {
+    const numCellsToFill = Math.floor(Math.random() * 20) + 15;
+    for (let i = 0; i < numCellsToFill; i++) {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * 81);
+        } while (grid[randomIndex] !== 0);
+        const randomValue = Math.floor(Math.random() * 9) + 1;
+        if (isValidMove(grid, Math.floor(randomIndex / 9), randomIndex % 9, randomValue)) {
+            grid[randomIndex] = randomValue;
+        }
+    }
+};
+
+export const isValidMove = (grid: number[], row: number, col: number, num: number): boolean => {
+    // Check if the number is not present in the current row, column, and 3x3 grid
+    return (
+        !isInRow(grid, row, num) &&
+        !isInColumn(grid, col, num) &&
+        !isInGrid(grid, row - (row % 3), col - (col % 3), num)
+    );
+};
+
+const isInRow = (grid: number[], row: number, num: number): boolean => {
+    for (let i = 0; i < 9; i++) {
+        if (grid[row * 9 + i] === num) {
+            return true;
+        }
+    }
+    return false;
+};
+
+const isInColumn = (grid: number[], col: number, num: number): boolean => {
+    for (let i = 0; i < 9; i++) {
+        if (grid[i * 9 + col] === num) {
+            return true;
+        }
+    }
+    return false;
+};
+
+const isInGrid = (grid: number[], startRow: number, startCol: number, num: number): boolean => {
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (grid[(startRow + i) * 9 + startCol + j] === num) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+```
+- The `SudokuGenerator` module exports a function `generatePartialSudoku` that returns a partially filled Sudoku grid.
+- `fillRandomCells` function fills a random number of cells with valid values to create an initial puzzle.
+- `isValidMove` checks if a move (placing a number) is valid in terms of Sudoku rules.
+- Helper functions `isInRow`, `isInColumn`, and `isInGrid` check if a number is present in a specific row, column, or 3x3 grid, respectively.
+
 Feel free to customize this explanation or add more details if necessary!
